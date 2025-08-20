@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Shield, Zap, BarChart3, Users, MessageSquare, CreditCard, Database, Star, Globe, TrendingUp } from "lucide-react";
 
 export default function Home() {
-  const demoUrl = "https://credio-ai.vercel.app";
+  const demoUrl = "https://credio-ai.streamlit.app";
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
