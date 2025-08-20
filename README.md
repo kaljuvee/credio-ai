@@ -65,40 +65,68 @@ The landing page includes "See Demo" buttons that link directly to different sec
 
 ## 🚀 Deployment
 
+### Build for Production
+
+Before deploying, you need to build the Next.js application:
+
+```bash
+# Build the application
+npm run build
+
+# The build creates an optimized production build in the 'out' directory
+# This project is configured for static export in next.config.ts
+```
+
 ### Deploy to Vercel (Recommended)
 
+**Option 1: Vercel CLI**
 1. **Install Vercel CLI**
    ```bash
    npm install -g vercel
    ```
 
-2. **Deploy**
+2. **Deploy from project directory**
    ```bash
+   cd credio-ai
    vercel
    ```
 
 3. **Follow the prompts**
    - Link to existing project or create new
-   - Select framework: Next.js
-   - Configure build settings (auto-detected)
+   - Framework: Next.js (auto-detected)
+   - Build settings: Auto-configured
+   - Deploy: Confirm deployment
 
 4. **Custom Domain (Optional)**
    ```bash
    vercel domains add yourdomain.com
    ```
 
+**Option 2: Vercel Dashboard**
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Click "New Project"
+3. Import from GitHub: `https://github.com/kaljuvee/credio-ai`
+4. Configure:
+   - Framework Preset: Next.js
+   - Build Command: `npm run build` (auto-detected)
+   - Output Directory: `out` (auto-detected)
+   - Install Command: `npm install` (auto-detected)
+5. Click "Deploy"
+
 ### Deploy to Render
 
+**Option 1: Render Dashboard**
 1. **Connect Repository**
    - Go to [Render Dashboard](https://dashboard.render.com)
-   - Click "New +" → "Web Service"
-   - Connect your GitHub repository
+   - Click "New +" → "Static Site"
+   - Connect your GitHub repository: `https://github.com/kaljuvee/credio-ai`
 
 2. **Configure Build Settings**
    ```
+   Name: credio-ai-landing
+   Branch: main
    Build Command: npm run build
-   Start Command: npm start
-   Environment: Node
+   Publish Directory: out
    ```
 
 3. **Environment Variables**
@@ -107,20 +135,60 @@ The landing page includes "See Demo" buttons that link directly to different sec
    ```
 
 4. **Deploy**
-   - Click "Create Web Service"
+   - Click "Create Static Site"
    - Render will automatically build and deploy
+
+**Option 2: Render Web Service (for dynamic features)**
+1. **Create Web Service**
+   - Go to [Render Dashboard](https://dashboard.render.com)
+   - Click "New +" → "Web Service"
+   - Connect GitHub repository
+
+2. **Configure Settings**
+   ```
+   Name: credio-ai-app
+   Environment: Node
+   Build Command: npm run build
+   Start Command: npm start
+   ```
+
+3. **Auto-Deploy**
+   - Enable auto-deploy from main branch
+   - Render will redeploy on every push
 
 ### Deploy to Netlify
 
-1. **Build the project**
+**Option 1: Netlify CLI**
+1. **Install Netlify CLI**
+   ```bash
+   npm install -g netlify-cli
+   ```
+
+2. **Build and deploy**
    ```bash
    npm run build
-   npm run export
+   netlify deploy --prod --dir=out
+   ```
+
+**Option 2: Netlify Dashboard**
+1. **Build the project locally**
+   ```bash
+   npm run build
    ```
 
 2. **Deploy to Netlify**
-   - Drag and drop the `out` folder to Netlify
+   - Go to [Netlify](https://app.netlify.com)
+   - Drag and drop the `out` folder
    - Or connect GitHub repository for automatic deployments
+
+**Option 3: Git Integration**
+1. Connect GitHub repository to Netlify
+2. Configure build settings:
+   ```
+   Build Command: npm run build
+   Publish Directory: out
+   ```
+3. Enable auto-deploy from main branch
 
 ### Deploy to Railway
 
@@ -129,25 +197,47 @@ The landing page includes "See Demo" buttons that link directly to different sec
    npm install -g @railway/cli
    ```
 
-2. **Login and deploy**
+2. **Login and initialize**
    ```bash
    railway login
    railway init
+   ```
+
+3. **Deploy**
+   ```bash
    railway up
    ```
+
+4. **Configure for Next.js (if needed)**
+   - Railway auto-detects Next.js projects
+   - Build Command: `npm run build`
+   - Start Command: `npm start`
 
 ### Deploy to DigitalOcean App Platform
 
 1. **Create App**
-   - Go to DigitalOcean App Platform
-   - Create new app from GitHub repository
+   - Go to [DigitalOcean App Platform](https://cloud.digitalocean.com/apps)
+   - Click "Create App"
+   - Connect GitHub repository: `https://github.com/kaljuvee/credio-ai`
 
-2. **Configure**
+2. **Configure Build Settings**
    ```
+   Name: credio-ai
+   Branch: main
+   Source Directory: / (root)
    Build Command: npm run build
-   Run Command: npm start
-   Environment Variables: NODE_ENV=production
+   Output Directory: out
    ```
+
+3. **Environment Variables**
+   ```
+   NODE_ENV=production
+   ```
+
+4. **Deploy**
+   - Review configuration
+   - Click "Create Resources"
+   - DigitalOcean will build and deploy automatically
 
 ## 🔧 Configuration
 
