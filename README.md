@@ -138,7 +138,7 @@ npm run build
    - Click "Create Static Site"
    - Render will automatically build and deploy
 
-**Option 2: Render Web Service (for dynamic features)**
+**Option 2: Render Web Service (Server-Side Rendering)**
 1. **Create Web Service**
    - Go to [Render Dashboard](https://dashboard.render.com)
    - Click "New +" → "Web Service"
@@ -148,13 +148,20 @@ npm run build
    ```
    Name: credio-ai-app
    Environment: Node
-   Build Command: npm run build
-   Start Command: npm start
+   Build Command: npm install && npm run build
+   Start Command: npm run start
    ```
 
-3. **Auto-Deploy**
+3. **Environment Variables**
+   ```
+   NODE_ENV=production
+   ```
+
+4. **Auto-Deploy**
    - Enable auto-deploy from main branch
    - Render will redeploy on every push
+
+**Note**: The project automatically detects the deployment platform and uses server-side rendering for Render, static export for Vercel.
 
 ### Deploy to Netlify
 
